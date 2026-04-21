@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Registration Successful";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <i class="fa-solid fa-envelope-circle-check fa-5x text-success"></i>
+                    </div>
+
+                    <h2 class="fw-bold text-dark mb-3">Verify Your Email</h2>
+                    <p class="text-muted fs-5">
+                        Registration was successful! We've sent a verification link to your email address.
+                    </p>
+
+                    <div class="alert alert-warning border-0 bg-light-subtle shadow-sm my-4 text-start">
+                        <div class="d-flex">
+                            <i class="fa-solid fa-circle-info mt-1 me-3 text-primary"></i>
+                            <div>
+                                <strong>Next Steps:</strong>
+                                <ul class="mb-0 ps-3 mt-2 small">
+                                    <li>Open your email inbox.</li>
+                                    <li>Click the <strong>Verify Email</strong> button in the message.</li>
+                                    <li>Check your <strong>Spam/Junk</strong> folder if you don't see it.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4 text-secondary opacity-25">
+
+                    <div class="d-grid gap-2">
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg rounded-pill">
+                            <i class="fa-solid fa-right-to-bracket me-2"></i>Go to Login
+                        </a>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-link text-decoration-none text-secondary">
+                            Return to Homepage
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center mt-4 text-muted small">
+                &copy; 2026 - Indian School of Coding
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        transition: transform 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+</style>

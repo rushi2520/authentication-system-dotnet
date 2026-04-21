@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Email Confirmed";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="bg-success" style="height: 10px;"></div>
+
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fa-solid fa-circle fa-stack-2x text-success opacity-10"></i>
+                            <i class="fa-solid fa-check-double fa-stack-1x text-success"></i>
+                        </span>
+                    </div>
+
+                    <h2 class="fw-bold text-dark">Email Verified!</h2>
+                    <p class="text-muted fs-5 mb-4">
+                        Thank you for verifying your email address. Your account is now fully active and ready to use.
+                    </p>
+
+                    <div class="p-3 bg-light rounded-3 mb-4">
+                        <p class="small text-secondary mb-0">
+                            <i class="fa-solid fa-shield-halved me-2"></i>
+                            Your connection to <strong>Rushikesh Shejul</strong> is now secure.
+                        </p>
+                    </div>
+
+                    <div class="d-grid gap-3">
+                        <a asp-controller="Register" asp-action="Login" class="btn btn-success btn-lg shadow-sm">
+                            <i class="fa-solid fa-right-to-bracket me-2"></i>Login to Your Dashboard
+                        </a>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-link text-muted text-decoration-none">
+                            <i class="fa-solid fa-house me-1"></i> Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center mt-4 text-secondary small">
+                Having trouble logging in? <a href="mailto:support@iscoding.com" class="text-success">Contact Support</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+    }
+
+    .card {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
