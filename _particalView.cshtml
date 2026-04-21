@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Users> signInManager;
+@inject UserManager<Users> userManager;
+
+
+<ul class="navbar-nav ms-auto">
+    @if (signInManager.IsSignedIn(User))
+    {
+        // Fetching the user to get the 'Name' property
+        var curr_user = userManager.Users.FirstOrDefault(x => x.Email == userManager.GetUserName(User));
+        string displayName = curr_user.Name;
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-thin fa-user"></i> @displayName
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li>
+                    <a class="dropdown-item" asp-controller="Student" asp-action="Index">
+                        <i class="fa-solid fa-id-card me-2"></i> My Profile
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="Settings">
+                        <i class="fa-solid fa-gear me-2"></i> Settings
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">
+                        <i class="fa-solid fa-gear me-2"></i> Change Password
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-controller="Student" asp-action="Fees">
+                        <i class="fa-solid fa-gear me-2"></i> Fees Receipt
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                        <button type="submit" class="dropdown-item text-danger">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Register" asp-action="Register">
+                <i class="fa-solid fa-user-plus"></i> Register
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">
+                <i class="fa-solid fa-right-to-bracket"></i> Login
+            </a>
+        </li>
+    }
+</ul>
