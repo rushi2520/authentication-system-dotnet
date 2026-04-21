@@ -1,0 +1,114 @@
+﻿@model PracticeMVC_DB_Identitty.ViewModels.LoginViewmodel
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        /* Remove display:flex from body to let the navbar sit at the top */
+    }
+
+    .login-wrapper {
+        padding-top: 80px; /* Space for the navbar */
+        padding-bottom: 40px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 1); /* Made solid white to fix transparency issues */
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Fix for overlapping text in floating labels */
+    .form-floating > .form-control::placeholder {
+        color: transparent; /* Hides the placeholder so label can take its place */
+    }
+
+    .brand-logo {
+        width: 80px;
+        height: 80px;
+        background: #764ba2;
+        color: white;
+        border-radius: 50%;
+        display: inline-flex; /* Changed to inline-flex */
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        font-size: 2rem;
+    }
+</style>
+<div class="container login-wrapper">
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4">
+            <div class="card shadow-lg">
+                <div class="card-header text-center border-0 bg-transparent pt-4">
+                    <div class="brand-logo">
+                        <i class="fa-solid fa-user-lock"></i>
+                    </div>
+                    <h3 class="fw-bold">Welcome Back</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Login" method="post">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Email">Email Address</label>
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+                            <label asp-for="Password">Password</label>
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="RememberMe" />
+                                <label class="form-check-label small" asp-for="RememberMe">Remember me</label>
+                            </div>
+                            <a asp-controller="Forgot" asp-action="ForgotPassword" class="small text-decoration-none">Forgot?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">SIGN IN</button>
+                    </form>
+                    @{
+                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                        {
+                            <div>
+                                <p>
+                                    There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                        article
+                                        about setting up this ASP.NET application to support logging in via external services
+                                    </a>.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <form id="external-account" asp-action="ExternalLogin" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                <div class="d-grid gap-2">
+                                    @foreach (var provider in Model.ExternalLogins!)
+                                    {
+                                        if (provider.DisplayName.Contains("Google"))
+                                        {
+                                            <button type="submit" class="btn btn-outline-info rounded-pill py-2 mt-3" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                                <i class="fa-brands fa-google me-2"></i> Sign in With Google
+                                            </button>
+                                        }
+                                        else if (provider.DisplayName.Contains("Facebook"))
+                                        {
+                                            <button type="submit" class="btn btn-outline-primary rounded-pill py-2 mt-3" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                                <i class="fa-brands fa-facebook me-2"></i> Sign in With Facebook
+                                            </button>
+                                        }
+                                    }
+                                </div>
+                            </form>
+                        }
+                    }
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
